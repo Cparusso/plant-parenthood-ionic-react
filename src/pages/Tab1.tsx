@@ -20,11 +20,18 @@ import React from 'react';
 import './Tab1.css';
 
 const Tab1: React.FC = () => {
+
+  const getPlants = () => {
+    fetch("http://localhost:3000/plants")
+      .then(resp => resp.json())
+      .then(console.log)
+  }
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab One</IonTitle>
+          <IonTitle>Browse Plants</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -41,7 +48,7 @@ const Tab1: React.FC = () => {
             </p>
           </IonCardContent>
         </IonCard>
-
+        {getPlants()}
         <IonList lines="none">
           <IonListHeader>
             <IonLabel>Resources</IonLabel>
