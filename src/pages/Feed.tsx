@@ -14,24 +14,17 @@ import {
   IonPage,
   IonTitle,
   IonToolbar
-} from '@ionic/react';
-import { book, build, colorFill, grid } from 'ionicons/icons';
-import React from 'react';
-import './Tab1.css';
+} from '@ionic/react'
+import { book, build, colorFill, grid } from 'ionicons/icons'
+import React from 'react'
+import './Tab1.css'
 
-const Tab1: React.FC = () => {
-
-  const getPlants = () => {
-    fetch("http://localhost:3000/plants")
-      .then(resp => resp.json())
-      .then(console.log)
-  }
-
+const Feed: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Browse Plants</IonTitle>
+          <IonTitle>Your Feed</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -48,7 +41,7 @@ const Tab1: React.FC = () => {
             </p>
           </IonCardContent>
         </IonCard>
-        {getPlants()}
+
         <IonList lines="none">
           <IonListHeader>
             <IonLabel>Resources</IonLabel>
@@ -72,7 +65,7 @@ const Tab1: React.FC = () => {
         </IonList>
       </IonContent>
     </IonPage>
-  );
-};
+  )
+}
 
-export default Tab1;
+export default Feed

@@ -1,13 +1,13 @@
 import React from 'react';
 import { IonBackButton, IonButtons, IonHeader, IonPage, IonToolbar, IonTitle, IonContent } from '@ionic/react';
 
-const Details: React.FC = () => {
+const Details = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/tab2" />
+            <IonBackButton defaultHref="/profile" />
           </IonButtons>
           <IonTitle>Detail</IonTitle>
         </IonToolbar>
