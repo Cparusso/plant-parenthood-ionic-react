@@ -1,13 +1,13 @@
 import React from 'react'
 import { IonContent, IonHeader, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar, IonAvatar, IonImg, IonThumbnail } from '@ionic/react'
 
-const Profile = () => {
-
+const Profile = (props) => {
+  console.log("USER IN PROPS IN PROFILE", props.user)
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Profile</IonTitle>
+          <IonTitle>{props.first_name}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>

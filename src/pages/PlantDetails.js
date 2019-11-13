@@ -15,7 +15,9 @@ import {
   IonList,
   IonListHeader,
   IonIcon,
-  IonCardSubtitle
+  IonCardSubtitle,
+  IonRange,
+  IonCheckbox,
 } from '@ionic/react'
 
 import { water, sunny, cloud, paw, leaf } from 'ionicons/icons'
@@ -29,7 +31,7 @@ const PlantDetails = ({ match }) => {
     fetch(`http://localhost:3000/plants/${match.params.id}`)
     .then(resp => resp.json())
     .then(setPlant)
-  }, [match.params.id]);
+  }, [])
     
   console.log("plant", plant)
   return (
@@ -54,49 +56,62 @@ const PlantDetails = ({ match }) => {
             <IonCardTitle>{plant.common_name}</IonCardTitle>
           </IonCardHeader>
 
-          <IonList lines="inset" inset="true">
+          <IonList lines="none">
             <IonListHeader>
               <IonLabel>Ideal Conditions</IonLabel>
             </IonListHeader>
 
             <IonItem>
-              <IonIcon slot="start" color="medium" icon={water} />
               <IonLabel>
                 <h3>Water</h3>
-                <p>{plant.water}</p>
+                {/* <p>{plant.water}</p> */}
               </IonLabel>
+              <IonRange min={0} max={100} step={20} snaps={true} ticks={false} value={"20"} >
+                <IonIcon size="small" slot="start" color="primary" icon={water} />
+                <IonIcon size="big" slot="end" color="primary" icon={water} />
+              </IonRange>
             </IonItem>
 
             <IonItem>
-              <IonIcon slot="start" color="medium" icon={sunny} />
               <IonLabel>
                 <h3>Light</h3>
-                <p>{plant.light}</p>
+                {/* <p>{plant.light}</p> */}
               </IonLabel>
+              <IonRange min={0} max={100} step={20} snaps={true} ticks={false} value={"60"} color="warning" >
+                <IonIcon size="small" slot="start" color="warning" icon={sunny} />
+                <IonIcon size="big" slot="end" color="warning" icon={sunny} />
+              </IonRange>
             </IonItem>
 
             <IonItem>
-              <IonIcon slot="start" color="medium" icon={cloud} />
               <IonLabel>
                 <h3>Humidity</h3>
-                <p>{plant.humidity}</p>
+                {/* <p>{plant.humidity}</p> */}
               </IonLabel>
+              <IonRange min={0} max={100} step={20} snaps={true} ticks={false} value={"40"} color={"secondary"} >
+                <IonIcon size="small" slot="start" color="secondary" icon={cloud} />
+                <IonIcon size="big" slot="end" color="secondary" icon={cloud} />
+              </IonRange>
             </IonItem>
 
             <IonItem>
-              <IonIcon slot="start" color="medium" icon={paw} />
-              <IonLabel>
-                <h3>Pet-Friendly</h3>
-                <p>{plant.pet_friendly ? "Yes" : "No"}</p>
-              </IonLabel>
-            </IonItem>
+              <IonItem>
+                <IonIcon color={plant.pet_friendly ? "dark" : "medium"} icon={paw} />
+                {/* <IonLabel>
+                  <h3>Pets</h3>
+                  <p>{plant.pet_friendly ? "Yes" : "No"}</p>
+                </IonLabel>
+                <IonCheckbox slot="end" color="dark" checked={plant.pet_friendly ? true : false}/> */}
+              </IonItem>
 
-            <IonItem>
-              <IonIcon slot="start" color="medium" icon={leaf} />
-              <IonLabel>
-                <h3>Succulent</h3>
-                <p>{plant.succulent ? "Yes" : "No"}</p>
-              </IonLabel>
+              <IonItem>
+                <IonIcon color={plant.succulent ? "success" : "medium"} icon={leaf} />
+                {/* <IonLabel>
+                  <h3>Succulent</h3>
+                  <p>{plant.succulent ? "Yes" : "No"}</p>
+                </IonLabel>
+                <IonCheckbox slot="end" color="success" checked={plant.succulent ? true : false} /> */}
+              </IonItem>
             </IonItem>
             
             <IonCardHeader>

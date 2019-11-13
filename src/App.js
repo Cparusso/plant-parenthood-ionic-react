@@ -1,5 +1,5 @@
-import React from 'react'
-import { Redirect, Route } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import {
   IonApp,
   IonIcon,
@@ -36,34 +36,47 @@ import '@ionic/react/css/display.css'
 /* Theme variables */
 import './theme/variables.css'
 
-const App = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route path="/feed" component={Feed} exact={true} />
-          <Route path="/profile" component={Profile} exact={true} />
-          <Route path="/profile/details" component={Details} />
-          <Route path="/browse" component={PlantsContainer} />
-          <Route path="/" render={() => <Redirect to="/feed" />} exact={true} />
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="feed" href="/feed">
-            <IonIcon icon={flash} />
-            <IonLabel>Your Feed</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="browse" href="/browse">
-            <IonIcon icon={apps} />
-            <IonLabel>Browse Plants</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="profile" href="/profile">
-            <IonIcon icon={people} />
-            <IonLabel>Profile</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-)
+const App = () => {
+  const [user, setUser] = useState({})
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/users/5`)
+      .then(resp => resp.json())
+      .then(setUser)
+      .then(() => console.log("THIS THE USER", user))
+  }, [])
+  console.log(user)
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route path="/feed" component={Feed} exact={true} />
+            <Route path="/profile" exact={true} render={(props) => {
+              return <Profile {...props} user={user} />
+            }}/>
+            <Route path="/profile/details" component={Details} />
+            <Route path="/browse" component={PlantsContainer} />
+            <Route path="/" render={() => <Redirect to="/feed" />} exact={true} />
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="feed" href="/feed">
+              <IonIcon icon={flash} />
+              <IonLabel>Your Feed</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="browse" href="/browse">
+              <IonIcon icon={apps} />
+              <IonLabel>Browse Plants</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="profile" href="/profile">
+              <IonIcon icon={people} />
+              <IonLabel>Profile</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  )
+}
 
 export default App
